@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#160b24">
+<title>A Little Universe For You ♡</title>
+<style>
+:root{--pink:#ff83b5;--rose:#ff4f91;--cream:#fff0f6;--violet:#b99aff}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--cream);font-family:Georgia,"Times New Roman",serif;background:radial-gradient(circle at 20% 15%,#49204e 0,transparent 32%),radial-gradient(circle at 85% 75%,#3c1c52 0,transparent 35%),linear-gradient(145deg,#10091c,#1b102b 55%,#10091c);overflow-x:hidden}
+button{font:inherit}
+.stars,.stars:before,.stars:after{position:fixed;inset:0;pointer-events:none;content:"";background-image:radial-gradient(2px 2px at 20px 30px,#fff 98%,transparent),radial-gradient(1px 1px at 80px 120px,#ffd7e8 98%,transparent),radial-gradient(1.5px 1.5px at 150px 60px,#fff 98%,transparent);background-size:190px 170px;opacity:.4;animation:twinkle 5s ease-in-out infinite alternate}
+.stars:before{transform:translate(70px,90px);opacity:.4}.stars:after{transform:translate(130px,20px);opacity:.25}
+@keyframes twinkle{to{opacity:.8}}
+main{width:min(760px,92vw);margin:auto;padding:34px 0 60px;position:relative}
+.topline{text-align:center;color:#ffc4dc;letter-spacing:4px;text-transform:uppercase;font:11px Arial,sans-serif}
+h1{text-align:center;font-size:clamp(35px,8vw,65px);line-height:1.02;margin:20px 0 8px;color:#ffe6f0;text-shadow:0 0 25px #ff6da5}
+.sub{text-align:center;color:#e8c8dc;font:14px Arial,sans-serif;line-height:1.7;margin:0 auto 28px;max-width:520px}
+.panel{background:linear-gradient(145deg,#ffffff12,#ffffff06);border:1px solid #ffffff25;border-radius:26px;padding:clamp(20px,5vw,36px);box-shadow:0 20px 70px #0005;backdrop-filter:blur(12px);margin:18px 0}
+.date{text-align:center;color:#ffc0dc;font:12px Arial,sans-serif;letter-spacing:3px}
+.bigheart{font-size:74px;text-align:center;filter:drop-shadow(0 0 20px #ff4f91);animation:beat 1.6s infinite}
+@keyframes beat{50%{transform:scale(1.12)}}
+h2{text-align:center;font-size:27px;margin:10px 0;color:#ffe5ef}
+p{line-height:1.8;color:#f4dce8;font-size:16px}
+.center{text-align:center}
+.btn{border:0;border-radius:999px;padding:13px 22px;margin:7px;background:linear-gradient(110deg,#ff70a8,#b78bff);color:#230e2b;font-weight:bold;cursor:pointer;box-shadow:0 8px 24px #ff5d9a35;transition:.2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn.secondary{background:#ffffff12;color:#ffe6f0;border:1px solid #ffffff35;box-shadow:none}
+.progress{height:7px;background:#ffffff18;border-radius:20px;overflow:hidden;margin:18px 0}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff76ad,#c6a0ff);transition:width .35s}
+#gameArea{display:none}
+#heartGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px auto;max-width:430px}
+.heartTile{height:76px;border:1px solid #ffb6d533;border-radius:18px;background:#ffffff0c;color:#ff9dc5;font-size:32px;cursor:pointer;transition:.2s}
+.heartTile:hover{background:#ff80b522;transform:scale(1.04)}
+.heartTile.found{background:#ff80b52b;border-color:#ff9dc5;animation:pop .35s}
+@keyframes pop{50%{transform:scale(1.15)}}
+#letter{display:none}
+.letterpaper{background:linear-gradient(135deg,#fff1f6,#f9dce9);color:#53233f;border-radius:18px;padding:clamp(20px,5vw,34px);box-shadow:inset 0 0 35px #d77ca522}
+.letterpaper p{color:#53233f;font-size:16px}
+.signature{font-style:italic;text-align:right;color:#9d3d70!important}
+#surprise{display:none;text-align:center}
+.sparkle{font-size:30px;letter-spacing:9px}
+footer{text-align:center;color:#bda4c4;font:11px Arial,sans-serif;margin-top:28px;line-height:1.8}
+.musicbar{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap}
+.small{font:12px Arial,sans-serif;color:#d9bfd2}
+#toast{min-height:24px;text-align:center;color:#ffd1e4;font:13px Arial,sans-serif}
+@media(max-width:420px){#heartGrid{gap:8px}.heartTile{height:66px}}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<main>
+  <div class="topline">a tiny universe made just for you</div>
+  <h1>Hey, Birthday Girl <span style="color:#ff83b5">♡</span></h1>
+  <p class="sub">I made you a little surprise. No rushing — unlock it one little heart at a time.</p>
+
+  <section class="panel" id="welcome">
+    <div class="date">25 NOVEMBER • 2012</div>
+    <div class="bigheart">♥</div>
+    <h2>One special day. One very special person.</h2>
+    <p class="center">Some surprises are not wrapped in boxes. Some are made of memories, tiny moments, and a whole lot of care. This one is for you.</p>
+    <div class="musicbar">
+      <button class="btn" id="musicBtn" onclick="toggleMusic()">♫ Play your little melody</button>
+      <span class="small" id="musicStatus">Original instrumental • made for this page</span>
+    </div>
+    <div class="center" style="margin-top:18px"><button class="btn" onclick="startGame()">Open your surprise ✨</button></div>
+  </section>
+
+  <section class="panel" id="gameArea">
+    <div class="date">LEVEL 1 • COLLECT THE LITTLE HEARTS</div>
+    <h2>Find all 8 hidden hearts 💗</h2>
+    <p class="center">Tap each heart. Every one has a tiny message waiting for you.</p>
+    <div class="progress"><span id="bar"></span></div>
+    <div class="center small" id="count">0 / 8 hearts found</div>
+    <div id="heartGrid"></div>
+    <div id="toast"></div>
+    <div class="center"><button class="btn" id="letterBtn" style="display:none" onclick="showLetter()">Unlock your birthday letter 💌</button></div>
+  </section>
+
+  <section class="panel" id="letter">
+    <div class="date">LEVEL 2 • A LETTER FROM ME</div>
+    <h2>For the girl who makes ordinary days feel special</h2>
+    <div class="letterpaper">
+      <p>Happiest Birthdayyyyy! 🥹💗</p>
+      <p>I wanted to do something a little different for your birthday, something that you could open and explore instead of just reading a normal message. So I made this tiny page for you. It may be a small thing, but every little part of it is here with lots of care.</p>
+      <p>First of all, I hope you always remember how special you are. Your smile, your silly jokes, your random talks, your little moods and all those tiny things that make you <em>you</em> — they matter. You don't have to be perfect or pretend to be happy every second. You deserve to be yourself, to be heard, and to be treated with kindness.</p>
+      <p>I hope this new year brings you beautiful memories, new things to learn, confidence in yourself, and so many reasons to smile. Keep following your dreams, keep being curious, and never think that your efforts are too small. Every step counts, even the quiet ones that nobody else notices.</p>
+      <p>And about us — I don't expect every day to be perfect. We might misunderstand each other sometimes, or have days when we don't know what to say. I just hope we keep choosing honesty, patience, respect and understanding. I want us to be able to talk things out, laugh at our silly moments, and celebrate each other's little wins.</p>
+      <p>Thank you for the conversations, the laughter, the random updates and the memories so far. I hope there are many more lovely moments ahead — simple ones, funny ones, and the kind we'll remember with a smile.</p>
+      <p>Today, please enjoy your day without worrying about anything. Eat your favourite cake, take lots of pictures, laugh loudly and let yourself feel celebrated. You deserve a day full of warmth.</p>
+      <p>Once again, happiest birthday! May your year be bright, peaceful, exciting and full of good surprises. Keep that lovely smile, birthday girl. 🎂✨</p>
+      <p class="signature">With lots of care,<br>Your favourite person (hopefully 😭) ♡</p>
+    </div>
+    <div class="center" style="margin-top:20px"><button class="btn" onclick="showFinal()">One last little surprise…</button></div>
+  </section>
+
+  <section class="panel" id="surprise">
+    <div class="sparkle">✦ ✧ ✦</div>
+    <div class="bigheart">💖</div>
+    <h2>Your day. Your little universe.</h2>
+    <p>Out of all the pages on the internet, this little corner was made just for you.</p>
+    <p class="center">Happy Birthday • 25.11.2012</p>
+    <p class="center" style="font-size:13px;color:#ffc5df">May your next chapter be full of sunshine, laughter and lovely surprises.</p>
+    <button class="btn secondary" onclick="location.reload()">Replay the surprise ↻</button>
+  </section>
+  <footer>Made with care, a little code, and lots of pink hearts ♡<br>Tip: turn on the melody for the full surprise.</footer>
+</main>
+<script>
+// Original melody generated in the browser with Web Audio — no copyrighted song is used.
+let audioCtx=null, master=null, musicTimer=null, noteIndex=0, musicOn=false;
+const melody=[523.25,659.25,783.99,659.25,587.33,659.25,698.46,783.99,880,783.99,698.46,659.25,587.33,523.25,587.33,659.25,
+523.25,659.25,783.99,880,783.99,698.46,659.25,587.33,659.25,698.46,783.99,698.46,659.25,587.33,523.25,493.88,
+523.25,587.33,659.25,783.99,880,783.99,698.46,659.25,587.33,659.25,698.46,783.99,1046.5,987.77,880,783.99,
+698.46,783.99,880,987.77,880,783.99,698.46,659.25,587.33,659.25,783.99,698.46,659.25,587.33,523.25,523.25];
+function playNote(freq,duration){
+  if(!audioCtx||!master)return;
+  const now=audioCtx.currentTime;
+  const osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
+  osc.type="sine"; osc.frequency.value=freq;
+  gain.gain.setValueAtTime(0,now);
+  gain.gain.linearRampToValueAtTime(.10,now+.04);
+  gain.gain.exponentialRampToValueAtTime(.001,now+duration);
+  osc.connect(gain);gain.connect(master);osc.start(now);osc.stop(now+duration+.03);
+  const shimmer=audioCtx.createOscillator(), sg=audioCtx.createGain();
+  shimmer.type="triangle";shimmer.frequency.value=freq*2;
+  sg.gain.setValueAtTime(.0001,now);sg.gain.linearRampToValueAtTime(.018,now+.04);sg.gain.exponentialRampToValueAtTime(.0001,now+duration*.7);
+  shimmer.connect(sg);sg.connect(master);shimmer.start(now);shimmer.stop(now+duration);
+}
+function toggleMusic(){
+  const btn=document.getElementById("musicBtn");
+  if(!audioCtx){audioCtx=new(window.AudioContext||window.webkitAudioContext)();master=audioCtx.createGain();master.gain.value=.65;master.connect(audioCtx.destination)}
+  if(musicOn){clearInterval(musicTimer);musicOn=false;btn.textContent="♫ Play your little melody";document.getElementById("musicStatus").textContent="Melody paused";return}
+  audioCtx.resume();musicOn=true;btn.textContent="Ⅱ Pause melody";document.getElementById("musicStatus").textContent="A little original birthday tune ♡";
+  playNote(melody[noteIndex%melody.length],.42);
+  musicTimer=setInterval(()=>{playNote(melody[noteIndex%melody.length],.42);noteIndex=(noteIndex+1)%melody.length},470);
+}
+const messages=["You deserve the sweetest day.","Your smile is a little bit of sunshine.","Keep believing in your dreams.","Your small wins matter too.","Never stop being wonderfully you.","You make ordinary moments memorable.","Wishing you calm, joy and laughter.","Today, the spotlight is all yours!"];
+let found=0;
+function startGame(){document.getElementById("welcome").style.display="none";document.getElementById("gameArea").style.display="block";buildGrid()}
+function buildGrid(){
+ const grid=document.getElementById("heartGrid");grid.innerHTML="";
+ const order=[3,0,6,1,7,4,2,5];
+ order.forEach((msgIndex,i)=>{const b=document.createElement("button");b.className="heartTile";b.textContent="♡";b.setAttribute("aria-label","Hidden heart "+(i+1));b.onclick=()=>{if(b.classList.contains("found"))return;b.classList.add("found");b.textContent="♥";b.disabled=true;found++;document.getElementById("count").textContent=found+" / 8 hearts found";document.getElementById("bar").style.width=(found/8*100)+"%";document.getElementById("toast").textContent=messages[msgIndex];if(found===8){document.getElementById("toast").textContent="You found every heart! Your letter is ready. 💌";document.getElementById("letterBtn").style.display="inline-block"}};grid.appendChild(b)})
+}
+function showLetter(){document.getElementById("gameArea").style.display="none";document.getElementById("letter").style.display="block";window.scrollTo({top:0,behavior:"smooth"})}
+function showFinal(){document.getElementById("letter").style.display="none";document.getElementById("surprise").style.display="block";window.scrollTo({top:0,behavior:"smooth"});for(let i=0;i<8;i++)setTimeout(()=>playNote([523.25,659.25,783.99,1046.5][i%4],.8),i*180)}
+</script>
+</body>
+</html>
